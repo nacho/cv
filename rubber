@@ -1,0 +1,22 @@
+#!/bin/sh
+# [Gedit Tool]
+# Input=nothing
+# Languages=latex
+# Name=rubber
+# Applicability=all
+# Save-files=nothing
+# Output=output-panel
+# Shortcut=<Primary>F7
+
+
+_main=`cat $GEDIT_CURRENT_DOCUMENT_PATH | grep -e "^% mainfile\:" | cut -d":" -f 2`
+[ -n "${_main}" ] || _main="$GEDIT_CURRENT_DOCUMENT_PATH"
+
+_dir=`dirname "${_main}"`
+_base=`basename "${_main}" .tex`
+_tex="${_base}.tex"
+_pdf="${_base}.pdf"
+
+cd ${_dir}
+rm -f "${_pdf}"
+rubber --inplace --maxerr -1 --short --force --warn all --pdf "${_tex}" && evince "${_pdf}" 2>/dev/null&
