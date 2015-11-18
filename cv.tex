@@ -14,6 +14,10 @@
 % adjust the page margins
 \usepackage[scale=0.8]{geometry}
 
+\usepackage{lastpage}
+
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
 \newcommand*{\cventryline}[1]{\cvitem{}{\small#1}}
 \newcommand*{\cventrylistitem}[1]{\cvlistitem{\small#1}}
 
